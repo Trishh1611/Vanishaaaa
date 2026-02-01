@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Galentine Quiz 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffc0cb, #ffd6e8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 22px;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  animation: pop 0.8s ease;
+}
+
+h1, h2 {
+  color: #ff4d6d;
+}
+
+.option {
+  background: #ffe5ec;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #ffb3c6;
+}
+
+button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 8px;
+}
+
+/* 💖 Hearts & Confetti */
+.float {
+  position: absolute;
+  font-size: 30px;
+  animation: float 4s linear forwards;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-800px); opacity: 0; }
+}
+
+/* 🧸 Teddy */
+.teddy {
+  font-size: 90px;
+  transition: transform 0.4s ease;
+}
+
+.teddy.happy { transform: scale(1.3); }
+.teddy.cry { animation: cry 0.4s infinite; }
+
+@keyframes cry {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+/* 💧 Tears */
+.tear {
+  position: absolute;
+  font-size: 18px;
+  animation: drop 1.2s linear forwards;
+}
+
+@keyframes drop {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(120px); opacity: 0; }
+}
+
+/* YES button */
+.yes-grow {
+  animation: grow 2s infinite;
+}
+
+@keyframes grow {
+  from { transform: scale(1); }
+  to { transform: scale(1.5); }
+}
+
+/* 💗 Pink box */
+.pink-box {
+  background: #ff4d6d;
+  color: white;
+  padding: 15px;
+  border-radius: 18px;
+  margin: 15px 0;
+}
+
+/* ✉️ Envelope */
+.envelope {
+  background: white;
+  border: 2px solid #ff4d6d;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 15px;
+  animation: open 1.2s ease;
+  font-size: 14px;
+}
+
+@keyframes open {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 Punjabi Background Music -->
+<audio autoplay loop id="bgMusic">
+  <source src="punjabi.mp3" type="audio/mpeg">
+</audio>
+<script>
+document.addEventListener("click", () => {
+  document.getElementById("bgMusic").play();
+});
+</script>
+
+<div class="card" id="content">
+  <h1>Hey Vanisha 💕</h1>
+  <p>Bestie lore test incoming 😌🫂</p>
+  <button onclick="startQuiz()">Start Quiz 💖</button>
+</div>
+
+<script>
+let score = 0;
+let q = 0;
+
+const questions = [
+{
+  q: "Q1. When was our first outing together? 🥹💫",
+  options: ["Movieee together 🍿","Surat 🏙️","Urban Chowk 🍔","Diu 🌊"],
+  correct: 2
+},
+{
+  q: "Q2. What do we actually have in common? 😌🫂",
+  options: ["Height 📏","Dono kaleshiii 🔥","Maa-baap ke restrictions 🫠","Dono ko bahar ghoomna pasand hai ✈️"],
+  correct: 2
+},
+{
+  q: "Q3. Best time spent together 💭💗",
+  options: ["Delhi me India Gate 🇮🇳","In campus listening to songs 🎧🌙","Diu me parasailing 🪂🌊","Mumbai (iykyk) 👀💅"],
+  correct: 1
+},
+{
+  q: "Q4. Kya hum kisi aur ke saath khush reh payenge? 🤨💔",
+  options: ["Shayad… agar wo hum jaisa ho 🫠","Haan, but boring hoga 😒","Nhi, sirf hum dono hi ek dusre ke liye bane hai 💖🥹","Pehle fight karenge phir dekhenge 🔥😂"],
+  correct: 2
+}
+];
+
+function startQuiz() { loadQuestion(); }
+
+function loadQuestion() {
+  let html = `<h2>${questions[q].q}</h2>`;
+  questions[q].options.forEach((opt,i)=>{
+    html += `<div class="option" onclick="checkAnswer(${i})">${opt}</div>`;
+  });
+  document.getElementById("content").innerHTML = html;
+}
+
+function checkAnswer(i){
+  if(i === questions[q].correct){
+    score++;
+    celebrate();
+  }
+  q++;
+  q < questions.length ? setTimeout(loadQuestion,700) : setTimeout(showScore,800);
+}
+
+function celebrate(){
+  const emojis=["💖","🎉","✨"];
+  for(let i=0;i<6;i++){
+    let e=document.createElement("div");
+    e.className="float";
+    e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left=Math.random()*window.innerWidth+"px";
+    e.style.top="100%";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),4000);
+  }
+}
+
+function showScore(){
+  document.getElementById("content").innerHTML=`
+    <h1>Score 💕</h1>
+    <p>${score}/4</p>
+    <button onclick="galentine()">Next 💖</button>`;
+}
+
+function galentine(){
+  document.getElementById("content").innerHTML=`
+    <div class="teddy" id="teddy">🧸</div>
+    <div class="pink-box">Will you be my Galentine, Vanisha? 💖</div>
+    <button class="yes-grow" onmouseover="happy()" onclick="finalYes()">YES 💕</button>
+    <button onclick="savageNo()">No 😶</button>`;
+}
+
+function happy(){ document.getElementById("teddy").className="teddy happy"; }
+
+function savageNo(){
+  const t=document.getElementById("teddy");
+  t.className="teddy cry";
+  for(let i=0;i<6;i++){
+    let tear=document.createElement("div");
+    tear.className="tear";
+    tear.innerHTML="💧";
+    tear.style.left=(window.innerWidth/2+Math.random()*40-20)+"px";
+    tear.style.top="260px";
+    document.body.appendChild(tear);
+    setTimeout(()=>tear.remove(),1200);
+  }
+  alert("Excuse me??? 😤 WRONG OPTION. Try again.");
+}
+
+function finalYes(){
+  document.getElementById("content").innerHTML=`
+    <h1>SOMETHING SPECIAL FOR YOU 💝</h1>
+    <div class="envelope">
+      Dear Vanisha 💕<br><br>
+      From campus walks to chaos-filled trips,  
+      from late-night songs to endless bakchodi —  
+      you’re my comfort human in every version of life.  
+      <br><br>
+      No matter how messy things get,  
+      we’ll always choose each other.  
+      Forever my Galentine 🧸💖  
+      <br><br>
+      Love always,<br>
+      <b>Trisha 🤍</b>
+    </div>`;
+  setInterval(celebrate,500);
+}
+</script>
+
+</body>
+</html>
