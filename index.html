@@ -53,7 +53,7 @@ button {
   margin: 8px;
 }
 
-/* 💖 Hearts & Confetti */
+/* Hearts & Confetti */
 .float {
   position: absolute;
   font-size: 30px;
@@ -65,7 +65,7 @@ button {
   to { transform: translateY(-800px); opacity: 0; }
 }
 
-/* 🧸 Teddy */
+/* Teddy */
 .teddy {
   font-size: 90px;
   transition: transform 0.4s ease;
@@ -82,7 +82,7 @@ button {
   100% { transform: translateX(0); }
 }
 
-/* 💧 Tears */
+/* Tears */
 .tear {
   position: absolute;
   font-size: 18px;
@@ -104,7 +104,7 @@ button {
   to { transform: scale(1.5); }
 }
 
-/* 💗 Pink box */
+/* Pink box */
 .pink-box {
   background: #ff4d6d;
   color: white;
@@ -113,7 +113,7 @@ button {
   margin: 15px 0;
 }
 
-/* ✉️ Envelope */
+/* Envelope */
 .envelope {
   background: white;
   border: 2px solid #ff4d6d;
@@ -138,18 +138,15 @@ button {
 
 <body>
 
-<!-- 🎶 Punjabi Background Music -->
+<!-- Punjabi Background Music -->
 <audio id="bgMusic" loop>
   <source src="punjabi.mp3" type="audio/mpeg">
 </audio>
-<script>
-
-</script>
 
 <div class="card" id="content">
   <h1>Hey Vanisha 💕</h1>
   <p>Bestie lore test incoming 😌🫂</p>
- <button onclick="startWithMusic()">Start Quiz 💖🎶</button>
+  <button onclick="startWithMusic()">Start Quiz 💖🎶</button>
 </div>
 
 <script>
@@ -157,29 +154,37 @@ let score = 0;
 let q = 0;
 
 const questions = [
-{
-  q: "Q1. When was our first outing together? 🥹💫",
-  options: ["Movieee together 🍿","Surat 🏙️","Urban Chowk 🍔","Diu 🌊"],
-  correct: 2
-},
-{
-  q: "Q2. What do we actually have in common? 😌🫂",
-  options: ["Height 📏","Dono kaleshiii 🔥","Maa-baap ke restrictions 🫠","Dono ko bahar ghoomna pasand hai ✈️"],
-  correct: 2
-},
-{
-  q: "Q3. Best time spent together 💭💗",
-  options: ["Delhi me India Gate 🇮🇳","In campus listening to songs 🎧🌙","Diu me parasailing 🪂🌊","Mumbai (iykyk) 👀💅"],
-  correct: 1
-},
-{
-  q: "Q4. Kya hum kisi aur ke saath khush reh payenge? 🤨💔",
-  options: ["Shayad… agar wo hum jaisa ho 🫠","Haan, but boring hoga 😒","Nhi, sirf hum dono hi ek dusre ke liye bane hai 💖🥹","Pehle fight karenge phir dekhenge 🔥😂"],
-  correct: 2
-}
+  {
+    q: "Q1. When was our first outing together? 🥹💫",
+    options: ["Movieee together 🍿","Surat 🏙️","Urban Chowk 🍔","Diu 🌊"],
+    correct: 2
+  },
+  {
+    q: "Q2. What do we actually have in common? 😌🫂",
+    options: ["Height 📏","Dono kaleshiii 🔥","Maa-baap ke restrictions 🫠","Dono ko bahar ghoomna pasand hai ✈️"],
+    correct: 2
+  },
+  {
+    q: "Q3. Best time spent together 💭💗",
+    options: ["Delhi me India Gate 🇮🇳","In campus listening to songs 🎧🌙","Diu me parasailing 🪂🌊","Mumbai (iykyk) 👀💅"],
+    correct: 1
+  },
+  {
+    q: "Q4. Kya hum kisi aur ke saath khush reh payenge? 🤨💔",
+    options: ["Shayad… agar wo hum jaisa ho 🫠","Haan, but boring hoga 😒","Nhi, sirf hum dono hi ek dusre ke liye bane hai 💖🥹","Pehle fight karenge phir dekhenge 🔥😂"],
+    correct: 2
+  }
 ];
 
-function startQuiz() { loadQuestion(); }
+function startWithMusic() {
+  const music = document.getElementById("bgMusic");
+  music.play().catch(() => {});
+  startQuiz();
+}
+
+function startQuiz() {
+  loadQuestion();
+}
 
 function loadQuestion() {
   let html = `<h2>${questions[q].q}</h2>`;
@@ -226,7 +231,9 @@ function galentine(){
     <button onclick="savageNo()">No 😶</button>`;
 }
 
-function happy(){ document.getElementById("teddy").className="teddy happy"; }
+function happy(){
+  document.getElementById("teddy").className="teddy happy";
+}
 
 function savageNo(){
   const t=document.getElementById("teddy");
@@ -264,6 +271,4 @@ function finalYes(){
 </script>
 
 </body>
-
 </html>
-
